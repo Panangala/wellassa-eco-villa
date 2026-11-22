@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+/* ─── Brand tokens ───────────────────────────────────────────────────────────
+   Contrast notes (WCAG AA):
+   • gold #E3B04B is used as text only on dark (forest) backgrounds (≈7.6:1).
+   • gold-deep #7D5A12 is the gold for text on parchment (≈5.4:1).
+   • leaf, terracotta and ink-soft all pass 4.5:1 on parchment; parchment text
+     passes on leaf and terracotta buttons.                                     */
+@theme {
+  --color-forest-night: #0f2a1e;
+  --color-forest-deep: #0a1f16;
+  --color-leaf: #2f6b3f;
+  --color-parchment: #f4eedc;
+  --color-parchment-deep: #ebe2c8;
+  --color-gold: #e3b04b;
+  --color-gold-deep: #7d5a12;
+  --color-terracotta: #a9472c;
+  --color-ink-soft: #3f4a40;
+}
+
+/* Fonts come from next/font CSS variables, so reference them inline */
+@theme inline {
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-label: var(--font-cinzel), "Cinzel", Georgia, serif;
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-parchment font-sans text-forest-night antialiased;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-gold) 45%, transparent);
+  }
+  input[type="date"] {
+    min-width: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    /* relative: keeps the button's sr-only text contained (e.g. inside the swipeable room row) */
+    @apply relative inline-flex items-center justify-center rounded-full font-medium whitespace-nowrap transition-colors duration-300;
+  }
+  .eyebrow {
+    @apply font-label text-xs tracking-[0.28em] uppercase;
+  }
+  /* Dark "night garden" sections with a soft warm glow */
+  .night-section {
+    background:
+      radial-gradient(60rem 30rem at 85% -10%, color-mix(in srgb, var(--color-gold) 14%, transparent), transparent 60%),
+      radial-gradient(40rem 26rem at 0% 110%, color-mix(in srgb, var(--color-leaf) 35%, transparent), transparent 65%),
+      var(--color-forest-night);
+    @apply text-parchment;
+  }
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* Fairy lights: tiny glowing dots that breathe slowly */
+.fairy-light {
+  box-shadow:
+    0 0 6px 2px color-mix(in srgb, var(--color-gold) 70%, transparent),
+    0 0 18px 6px color-mix(in srgb, var(--color-gold) 25%, transparent);
+  opacity: 0.35;
+  will-change: opacity;
+  animation: twinkle 4.5s ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Scroll reveal (driven by RevealObserver; without JS everything is simply visible) */
+.reveal-ready .reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.reveal-ready .reveal {
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+}
+
+/* Hero text entrance (CSS only, so it doesn't wait for JavaScript) */
+.hero-rise {
+  animation: hero-rise 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
