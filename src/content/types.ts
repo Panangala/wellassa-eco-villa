@@ -13,7 +13,11 @@ export type IconName =
   | "laundry"
   | "hike"
   | "tent"
-  | "bbq";
+  | "bbq"
+  | "music"
+  | "stars"
+  | "forest"
+  | "sprout";
 
 export interface Photo {
   /** Image id from images.generated.json, e.g. "img-0094" */
@@ -87,15 +91,21 @@ export interface SiteContent {
     region: string;
     country: string;
     countryCode: string;
+    /** Street address; null until confirmed (the locality/region/country line is shown instead). */
     address: string | null;
-    mapEmbedUrl: string | null;
-    mapLink: string | null;
-    areaMapLink: string;
+    /** Exact villa position (WGS84), used for the map, map link and structured data. */
+    coordinates: { latitude: number; longitude: number };
+    mapEmbedUrl: string;
+    mapLink: string;
+    /** Names from `nearby` to show as landmarks in "Getting here". */
+    landmarks: string[];
     gettingHere: string[] | null;
   };
   photos: Record<"hero" | "story" | "storySecondary" | "night" | "nature", Photo>;
   gallery: Photo[];
   rooms: Room[];
+  /** Other spaces shown under the room cards (e.g. living area, bathroom). */
+  spaces: { name: string; photo: Photo }[];
   extras: { name: string; priceLKR: number; unit: string }[];
   breakfast: { options: string[] };
   nearby: NearbyPlace[];
@@ -103,7 +113,7 @@ export interface SiteContent {
   copy: {
     nav: { href: string; label: string }[];
     cta: { book: string; checkAvailability: string; viewRooms: string; enquire: string };
-    hero: { eyebrow: string; headline: string; sub: string };
+    hero: { eyebrow: string; headline: string; sub: string; badge: string };
     welcome: {
       eyebrow: string;
       heading: string;
@@ -121,13 +131,24 @@ export interface SiteContent {
       singleRateNote: string;
       breakfastNote: string;
       ask: string;
+      spacesHeading: string;
     };
     experiences: {
       eyebrow: string;
       heading: string;
       intro: string;
+      dayHeading: string;
       activities: IconItem[];
+      night: {
+        eyebrow: string;
+        heading: string;
+        intro: string;
+        items: IconItem[];
+        cta: string;
+        ctaMessage: string;
+      };
       nearbyHeading: string;
+      nearbyIntro: string;
     };
     gallery: { eyebrow: string; heading: string; intro: string };
     location: {
@@ -136,9 +157,8 @@ export interface SiteContent {
       intro: string;
       gettingHereHeading: string;
       gettingHereFallback: string;
-      mapPlaceholder: string;
+      landmarksHeading: string;
       openMap: string;
-      openAreaMap: string;
       askDirections: string;
     };
     howToBook: { eyebrow: string; heading: string; steps: { title: string; text: string }[] };

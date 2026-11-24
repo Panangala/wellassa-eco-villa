@@ -30,6 +30,12 @@ export function JsonLd() {
       addressRegion: site.location.region,
       addressCountry: site.location.countryCode,
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: site.location.coordinates.latitude,
+      longitude: site.location.coordinates.longitude,
+    },
+    hasMap: site.location.mapLink,
     areaServed: `${site.location.district}, ${site.location.region}`,
     maximumAttendeeCapacity: 20,
     sameAs,

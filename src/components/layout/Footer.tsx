@@ -44,6 +44,18 @@ export function Footer() {
                 {site.contact.email}
               </a>
             </li>
+            <li>
+              <a
+                href={site.location.mapLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 rounded hover:text-gold"
+              >
+                <Icon name="pin" size={18} className="shrink-0 text-gold" />
+                {site.location.address ?? `${site.location.locality}, ${site.location.region}, ${site.location.country}`}
+                <span className="sr-only">(opens Google Maps in a new tab)</span>
+              </a>
+            </li>
           </ul>
         </div>
 

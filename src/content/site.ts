@@ -19,6 +19,11 @@
 
 import type { SiteContent } from "./types";
 
+// Nearby place names, used in several sections. Change them here only.
+// "Mini World's End" matches our Facebook posts; "Little World's End" is kept as an SEO keyword only.
+const MINI_WORLDS_END = "Mini World's End";
+const MAHIYANGANAYA_TEMPLE = "Mahiyanganaya Temple";
+
 export const site: SiteContent = {
   locale: "en",
 
@@ -29,9 +34,8 @@ export const site: SiteContent = {
     facebookName: "Wellassa Eco Villa Bungalow",
     tagline: "Your peaceful eco-friendly escape in the heart of Wellassa",
     values: ["Nature", "Tranquility", "Warm Hospitality"],
-    // TODO: add your logo as photos/logo.png, run `npm run images`,
-    //       then change this to "/images/logo.png". Until then a text wordmark is shown.
-    logo: null,
+    // Built from photos/logo.png by `npm run images` (also makes the favicons). Set to null for a text wordmark.
+    logo: "/images/logo.png",
   },
 
   // Live site address, used for SEO, sitemap and social cards.
@@ -46,6 +50,7 @@ export const site: SiteContent = {
       "Bibile villa",
       "Wellassa eco villa",
       "Little World's End stay",
+      `${MINI_WORLDS_END} Bibile`,
       "Mahiyangana accommodation",
       "Sri Lanka countryside homestay",
       "Bibile bungalow",
@@ -78,14 +83,15 @@ export const site: SiteContent = {
     region: "Uva Province",
     country: "Sri Lanka",
     countryCode: "LK",
-    address: null, // TODO: exact street address
-    // TODO: paste the Google Maps "Embed a map" src URL (Share → Embed a map → copy the src="…" part)
-    mapEmbedUrl: null,
-    // TODO: paste your Google Maps place link (Share → Copy link)
-    mapLink: null,
-    // Shown until mapLink is set: an area-level search for Bibile.
-    areaMapLink: "https://www.google.com/maps/search/?api=1&query=Bibile%2C+Sri+Lanka",
+    address: null, // TODO: exact street address (until then "Bibile, Uva Province, Sri Lanka" is shown)
+    coordinates: { latitude: 7.1451369, longitude: 81.1678506 },
+    // Keyless Google Maps embed + share link, both pinned to the coordinates above.
+    mapEmbedUrl: "https://www.google.com/maps?q=7.1451369,81.1678506&z=15&output=embed",
+    mapLink: "https://www.google.com/maps/search/?api=1&query=7.1451369,81.1678506",
+    // Shown under "Getting here". Must match names in `nearby` below (their distance shows once filled in).
+    landmarks: [MAHIYANGANAYA_TEMPLE, MINI_WORLDS_END],
     // TODO: add travel directions, e.g. from Colombo / Kandy / Ella, and distances to nearby places.
+    //       Until then the map, the Google Maps button and the landmarks above are shown.
     gettingHere: null,
   },
 
@@ -115,46 +121,51 @@ export const site: SiteContent = {
   },
 
   // Gallery order = display order. All ids must exist in images.generated.json.
+  // Room photos were matched against the room shots in our Facebook posts
+  // (clay bed double, family, triple, living area, bathroom).
   gallery: [
     { id: "img-0094", alt: "The bungalow at dusk, framed by palms, with soft lights glowing along the walls" },
+    { id: "img-0080", alt: "Double room (clay bed): a raised clay bed with a rolled woven mat beside a curtained window" },
+    { id: "img-0071", alt: "Living area with sofas, colourful cushions, a TV and a beamed timber ceiling" },
+    { id: "img-0120", alt: "Family room: two double beds under a timber ceiling, with a bedside lamp glowing" },
     { id: "img-0137", alt: "The villa lit up at night, with two dogs sitting on the veranda" },
-    { id: "img-0071", alt: "Living room with colourful cushions, sofas and a beamed timber ceiling" },
-    { id: "img-0118", alt: "Double room with a large bed, crisp white sheets and a timber-framed window" },
+    { id: "img-0110", alt: "Triple room at night: a double bed and a single bed in white linen, with a wall fan" },
+    { id: "img-0135", alt: "Bathroom with a pedestal washbasin, mirror, shower and toilet on patterned floor tiles" },
     { id: "img-0089", alt: "The bungalow in daylight, surrounded by dense green forest" },
-    { id: "img-0104", alt: "Room with a double bed and a single bed, white linen and a wall fan" },
+    { id: "img-0078", alt: "Double room (clay bed) with a timber ceiling, wall fan and a window onto the trees" },
     { id: "img-0098", alt: "Trees and vines on the villa's land, with a jackfruit on the trunk" },
-    { id: "img-0120", alt: "Room with two double beds, a wooden beamed ceiling and black-and-white curtains" },
-    { id: "img-0074", alt: "Living room with tall double doors opening onto the veranda" },
+    { id: "img-0104", alt: "Triple room: a double bed and a single bed made up in white linen" },
+    { id: "img-0074", alt: "Living area with tall double doors opening onto the veranda" },
     { id: "img-0139", alt: "Night view along the side of the bungalow, lit by warm wall lamps" },
+    { id: "img-0126", alt: "Family room: two double beds under a sloping timber ceiling" },
     { id: "img-0103", alt: "Dining table with plates, a basket of fresh fruit and wooden spice jars" },
     { id: "img-0092", alt: "A garden swing on the open grounds beside the villa" },
-    { id: "img-0126", alt: "Room with two double beds under a sloping wooden ceiling" },
     { id: "img-0083", alt: "Front of the villa with its white pillars and red-tiled roof" },
+    { id: "img-0118", alt: "A double bed in white linen beside a timber-framed window, at night" },
     { id: "img-0112", alt: "Bedroom corner with a dressing table, mirror, flowers and a clothes rail" },
     { id: "img-0100", alt: "Open land and tall trees beside the villa" },
-    { id: "img-0110", alt: "Bedroom at night with a double bed, a single bed and soft bedside light" },
-    { id: "img-0135", alt: "Tiled bathroom with a washbasin, mirror, shower and toilet" },
+    { id: "img-0128", alt: "Bathroom with a washbasin, mirror cabinet and toilet" },
     { id: "img-0090", alt: "Corner of the bungalow with a wall light, facing tall trees and a garden swing" },
     { id: "img-0143", alt: "Kitchen with a fridge, sink, kettle and a spice rack" },
-    { id: "img-0080", alt: "Simple room with a raised sleeping platform and a rolled woven mat" },
     { id: "img-0096", alt: "Side of the bungalow with its long tiled roof and a row of windows" },
-    { id: "img-0128", alt: "Bathroom with a washbasin, mirror cabinet and toilet" },
     { id: "img-0141", alt: "The bungalow glowing under wall lamps on a dark night" },
   ],
 
   // ── Rooms & rates (LKR per night) ──────────────────────────────────────────
   // `withMeals` is the price with breakfast (or "with food" for the dormitory).
   // Leave `withMeals` null for options that have one price only.
+  // Prices match our Facebook posts. The posts call the higher rate "With Food".
+  // TODO: confirm whether the higher room rate is breakfast only or all meals ("With food").
   rooms: [
     {
       id: "double",
-      name: "Double Room",
-      summary: "A quiet room with a large double bed, timber window and garden views.",
+      name: "Double Room (clay bed)",
+      summary: "A raised clay bed for two under a timber ceiling, with a window onto the trees.",
       capacity: null, // TODO: confirm max guests for the Double room
       rates: { roomOnly: 7500, withMeals: 8500 },
       withMealsLabel: "Bed & breakfast",
-      // TODO: confirm this photo shows the Double room
-      photo: { id: "img-0118", alt: "Double room with a large bed and white sheets beside a timber-framed window" },
+      // Matches the "Clay bed (Double room)" shot in our Facebook posts.
+      photo: { id: "img-0080", alt: "Double room with a raised clay bed and a rolled woven mat beside a curtained window" },
     },
     {
       id: "triple",
@@ -163,8 +174,8 @@ export const site: SiteContent = {
       capacity: null, // TODO: confirm max guests for the Triple room
       rates: { roomOnly: 8500, withMeals: 10000 },
       withMealsLabel: "Bed & breakfast",
-      // TODO: confirm this photo shows the Triple room
-      photo: { id: "img-0104", alt: "Room with a double bed and a single bed made up in white linen" },
+      // Matches the "Triple room" shot in our Facebook posts.
+      photo: { id: "img-0110", alt: "Triple room with a double bed and a single bed in white linen, lit by a bedside lamp" },
     },
     {
       id: "family",
@@ -173,7 +184,7 @@ export const site: SiteContent = {
       capacity: null, // TODO: confirm max guests for the Family room
       rates: { roomOnly: 10000, withMeals: 12000 },
       withMealsLabel: "Bed & breakfast",
-      // TODO: confirm this photo shows the Family room
+      // Matches the "Family room" shot in our Facebook posts.
       photo: { id: "img-0120", alt: "Family room with two double beds and black-and-white curtains" },
     },
     {
@@ -183,19 +194,26 @@ export const site: SiteContent = {
       capacity: 10,
       rates: { roomOnly: 20000, withMeals: 25000 },
       withMealsLabel: "With food",
-      // TODO: confirm this photo shows the dormitory (or replace it)
-      photo: { id: "img-0080", alt: "Simple room with a raised sleeping platform and a rolled woven mat" },
+      // TODO: no dormitory photo confirmed yet. The old pick (img-0080) turned out to be the clay-bed
+      //       double room, so an outside view of the bungalow's long wing stands in until you send one.
+      photo: { id: "img-0096", alt: "The long side wing of the bungalow, with a tiled roof and a row of windows" },
     },
     {
       id: "villa",
       name: "Whole Villa",
-      summary: "The entire bungalow and grounds, just for your group.",
+      summary: "Up to 20 guests, per night: the entire villa, booked for your group.",
       capacity: 20,
       rates: { roomOnly: 45000, withMeals: null },
       withMealsLabel: null,
       featured: true,
       photo: { id: "img-0089", alt: "The whole bungalow in daylight, surrounded by green forest" },
     },
+  ],
+
+  // Shown under the room cards. Both match shots in our Facebook posts.
+  spaces: [
+    { name: "Living area", photo: { id: "img-0071", alt: "Living area with sofas, colourful cushions, a TV and glass doors to the garden" } },
+    { name: "Bathroom", photo: { id: "img-0135", alt: "Bathroom with a pedestal washbasin, mirror, shower and toilet" } },
   ],
 
   extras: [{ name: "Laundry (7 kg machine)", priceLKR: 1000, unit: "per use" }],
@@ -208,15 +226,15 @@ export const site: SiteContent = {
   // TODO: add travel times/distances for each place (leave null to hide).
   nearby: [
     {
-      name: "Little World's End",
-      kind: "Viewpoint",
-      description: "A hill-edge lookout over the countryside. Go early for clear views.",
+      name: MAHIYANGANAYA_TEMPLE,
+      kind: "Temple",
+      description: "Mahiyangana Raja Maha Vihara, one of Sri Lanka's most revered Buddhist temples. Just a short drive away.",
       distance: null,
     },
     {
-      name: "Mahiyangana Raja Maha Vihara",
-      kind: "Temple",
-      description: "One of Sri Lanka's most revered Buddhist temples, an easy day trip.",
+      name: MINI_WORLDS_END,
+      kind: "Viewpoint",
+      description: "A hill-edge lookout over the countryside, just a short drive away. Go early for clear views.",
       distance: null,
     },
     {
@@ -260,7 +278,7 @@ export const site: SiteContent = {
     },
     {
       q: "What is there to do?",
-      a: "Hike, camp, sit around a campfire or enjoy a BBQ night on our land. Waterfalls and natural lakes are nearby, as are Little World's End, Mahiyangana Raja Maha Vihara, a temple and a meditation centre.",
+      a: `Hike by day. After dark, go night camping, gather round a campfire with music or enjoy a BBQ night on our land. Waterfalls and natural lakes are nearby, and ${MAHIYANGANAYA_TEMPLE}, ${MINI_WORLDS_END}, a village temple and a meditation centre are just a short drive away.`,
     },
     {
       q: "Is there laundry?",
@@ -299,9 +317,10 @@ export const site: SiteContent = {
       enquire: "Enquire on WhatsApp",
     },
     hero: {
-      eyebrow: "Bibile · Wellassa · Sri Lanka",
-      headline: "A quiet bungalow between the mountains",
-      sub: "Your peaceful eco-friendly escape in the heart of Wellassa.",
+      eyebrow: "The Ultimate Natural Getaway | Bibile, Uva Province",
+      headline: "Escape to Tranquility",
+      sub: "A quiet bungalow between the mountains: your peaceful eco-friendly escape in the heart of Wellassa.",
+      badge: "Local & Foreigners Welcome",
     },
     welcome: {
       eyebrow: "Our story",
@@ -339,18 +358,34 @@ export const site: SiteContent = {
       singleRateNote: "One rate for the whole villa",
       breakfastNote: "Breakfast options: full English, Sri Lankan, vegetarian or non-vegetarian.",
       ask: "Ask about this",
+      spacesHeading: "Also in the villa",
     },
     experiences: {
       eyebrow: "Experiences & nearby",
       heading: "Slow days, starry nights",
       intro: "Spend the day outdoors and the evening by the fire. When you want to explore, there's plenty close by.",
+      dayHeading: "By day",
       activities: [
         { icon: "hike", title: "Hiking", text: "Walk the hills and forest paths around Bibile." },
-        { icon: "tent", title: "Camping", text: "Pitch up on our land and sleep under the stars." },
-        { icon: "campfire", title: "Campfires", text: "Gather round the fire on cool evenings." },
-        { icon: "bbq", title: "BBQ nights", text: "Grill dinner outdoors with your group." },
+        { icon: "sprout", title: "Our own land", text: "Wander past the rice field, plants and herbs around the bungalow." },
       ],
+      night: {
+        eyebrow: "Special night experiences",
+        heading: "Experience the Magic of the Night",
+        intro: "When the sun goes down, the lamps come on and the garden glows. Stay up by the fire, grill dinner outdoors or sleep out under the sky.",
+        items: [
+          { icon: "tent", title: "Night camping", text: "Pitch a tent on our land and spend the night outdoors." },
+          { icon: "bbq", title: "BBQ night", text: "Fire up the grill and share dinner in the open air." },
+          { icon: "bbq", title: "Outdoor BBQ feast", text: "Gather your whole group round the grill for a long, slow dinner." },
+          { icon: "music", title: "Cozy campfires & music", text: "Sit by the fire with music and stories on cool evenings." },
+          { icon: "stars", title: "Starry night camping", text: "Fall asleep under a countryside sky full of stars." },
+          { icon: "forest", title: "Magical forest vibe", text: "Tall trees, warm lamps and the quiet sounds of the forest after dark." },
+        ],
+        cta: "Book your magical getaway now!",
+        ctaMessage: "Hello Wellassa Eco Villa! I'd like to ask about a night stay with camping or a BBQ.",
+      },
       nearbyHeading: "Places nearby",
+      nearbyIntro: `${MAHIYANGANAYA_TEMPLE}, ${MINI_WORLDS_END} and other places are just a short drive away.`,
     },
     gallery: {
       eyebrow: "Gallery",
@@ -362,10 +397,10 @@ export const site: SiteContent = {
       heading: "In the hills of Bibile",
       intro: "We're in the Wellassa district of Bibile, in Sri Lanka's Uva Province: countryside between the mountains.",
       gettingHereHeading: "Getting here",
-      gettingHereFallback: "Message us on WhatsApp and we'll send directions and a map pin.",
-      mapPlaceholder: "Map coming soon",
+      gettingHereFallback:
+        "The pin on the map marks the villa. Open it in Google Maps for directions, or message us on WhatsApp and we'll help you find the way.",
+      landmarksHeading: "Landmarks nearby",
       openMap: "Open in Google Maps",
-      openAreaMap: "See Bibile on Google Maps",
       askDirections: "Ask for directions",
     },
     howToBook: {

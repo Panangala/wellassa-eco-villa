@@ -24,6 +24,10 @@ export function Hero() {
 
       <div className="mx-auto w-full max-w-7xl px-4 pt-32 pb-16 sm:px-6 sm:pb-24 lg:px-8">
         <div className="hero-rise max-w-3xl">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/50 bg-forest-night/60 px-4 py-1.5 text-sm font-medium text-parchment shadow-[0_0_24px_rgb(227_176_75/0.25)] backdrop-blur-sm">
+            <Icon name="globe" size={16} className="text-gold" />
+            {hero.badge}
+          </p>
           <p className="eyebrow text-gold">{hero.eyebrow}</p>
           <h1
             id="hero-heading"

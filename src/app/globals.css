@@ -74,6 +74,14 @@
       var(--color-forest-night);
     @apply text-parchment;
   }
+  /* Photo in a white print frame with a strip of paper tape on top */
+  .taped-frame {
+    @apply relative bg-white p-2 pb-3 shadow-lg shadow-forest-night/15 sm:p-3 sm:pb-4;
+  }
+  .taped-frame::before {
+    content: "";
+    @apply absolute -top-3 left-1/2 z-10 h-6 w-20 -translate-x-1/2 -rotate-2 bg-gold/45 shadow-sm;
+  }
   .faq summary::-webkit-details-marker {
     display: none;
   }

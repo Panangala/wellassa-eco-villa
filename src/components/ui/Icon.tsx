@@ -16,7 +16,8 @@ type UiIcon =
   | "chevron-down"
   | "pin"
   | "arrow-right"
-  | "check";
+  | "check"
+  | "globe";
 
 interface Props extends SVGProps<SVGSVGElement> {
   name: UiIcon;
@@ -89,6 +90,40 @@ const paths: Record<UiIcon, ReactNode> = {
       <path d="M4 10h16a8 8 0 0 1-16 0Z" />
       <path d="m8 17-2 4M16 17l2 4M12 18v3" />
       <path d="M9 3c-.8 1 .8 2 0 4M13 3c-.8 1 .8 2 0 4M17 3c-.8 1 .8 2 0 4" />
+    </>
+  ),
+  music: (
+    <>
+      <path d="M9 18V5l11-2v13" />
+      <circle cx="6.5" cy="18" r="2.5" />
+      <circle cx="17.5" cy="16" r="2.5" />
+    </>
+  ),
+  stars: (
+    <>
+      <path d="M12 3l1.6 3.9 4.1.4-3.1 2.8.9 4.1-3.5-2.2-3.5 2.2.9-4.1-3.1-2.8 4.1-.4L12 3Z" />
+      <path d="M5 17.5v3M3.5 19h3M19 16v4M17 18h4" />
+    </>
+  ),
+  forest: (
+    <>
+      <path d="M8 3 3.5 11h2.5L3 16h10l-3-5h2.5L8 3Z" />
+      <path d="M8 16v5" />
+      <path d="M16.5 7 13 13h2l-2 4h7.5l-2-4h2l-4-6Z" />
+      <path d="M16.5 17v4" />
+    </>
+  ),
+  sprout: (
+    <>
+      <path d="M12 21v-9" />
+      <path d="M12 12c0-4 2.5-6.5 7-6.5 0 4.5-2.5 6.5-7 6.5Z" />
+      <path d="M12 14.5c0-3.5-2-5.5-6.5-5.5 0 3.5 2 5.5 6.5 5.5Z" />
+    </>
+  ),
+  globe: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3Z" />
     </>
   ),
   whatsapp: (

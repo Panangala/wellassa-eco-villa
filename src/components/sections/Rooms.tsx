@@ -111,6 +111,24 @@ export function Rooms() {
           </Reveal>
         ))}
 
+        <div className="mt-16">
+          <h3 className="text-center font-display text-3xl text-forest-night italic">{t.spacesHeading}</h3>
+          <ul className="mx-auto mt-8 grid max-w-3xl grid-cols-2 gap-4 sm:gap-10">
+            {site.spaces.map((s, i) => (
+              <Reveal as="li" key={s.name} delay={i * 0.08}>
+                <figure className={`taped-frame ${i % 2 ? "rotate-1" : "-rotate-1"}`}>
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <SitePhoto photo={s.photo} fill sizes="(min-width: 768px) 360px, 45vw" className="object-cover" />
+                  </div>
+                  <figcaption className="pt-2.5 text-center font-display text-xl text-forest-night italic sm:text-2xl">
+                    {s.name}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+
         <div className="mt-10 grid gap-4 rounded-3xl border border-forest-night/10 p-6 text-ink-soft sm:grid-cols-2 sm:p-8">
           <p className="flex gap-3">
             <Icon name="breakfast" className="shrink-0 text-leaf" />
