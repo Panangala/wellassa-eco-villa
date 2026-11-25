@@ -38,9 +38,9 @@ export const site: SiteContent = {
     logo: "/images/logo.png",
   },
 
-  // Live site address, used for SEO, sitemap and social cards.
-  // TODO: change to your custom domain once connected (e.g. "https://www.wellassaecovilla.com").
-  siteUrl: "https://wellassa-eco-villa.vercel.app",
+  // Live site address (no trailing slash), used for canonical URLs, social cards, sitemap,
+  // robots.txt and structured data. www.wellassaecovilla.com redirects here.
+  siteUrl: "https://wellassaecovilla.com",
 
   seo: {
     title: "Wellassa Eco Villa | Countryside Bungalow Stay in Bibile, Sri Lanka",

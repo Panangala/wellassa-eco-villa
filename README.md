@@ -103,8 +103,9 @@ Note: `public/images/` (the optimised photos) **is** committed so Vercel can ser
 2. In Vercel: **Project → Settings → Domains → Add**, enter e.g. `wellassaecovilla.com` and `www.wellassaecovilla.com`.
 3. Vercel shows the DNS records to add at your registrar (usually an `A` record for the bare domain and a
    `CNAME` for `www`). Add them; HTTPS is set up automatically once DNS updates (minutes to a few hours).
-4. In `site.ts`, set `siteUrl` to the new address (e.g. `"https://www.wellassaecovilla.com"`) and push.
-   It's used for the sitemap, social share cards and search-engine data.
+4. `siteUrl` in `site.ts` is `"https://wellassaecovilla.com"` (the bare domain is the main address;
+   `www` redirects to it). It's used for canonical URLs, the sitemap, robots.txt, social share cards and
+   search-engine data. If the domain ever changes, update it there and push.
 5. Optional: add the site to [Google Search Console](https://search.google.com/search-console) and submit
    `https://<your-domain>/sitemap.xml`.
 

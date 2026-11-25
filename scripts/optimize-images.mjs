@@ -7,10 +7,10 @@
 // For every photo it writes <slug>-<width>.webp for each width in WIDTHS and records
 // its width/height in src/content/images.generated.json.
 // Slug: "2025_10_14_21_04_26_IMG_0102.JPG" -> "img-0102"; other names are lower-kebab-cased.
-// ./photos/logo.png (if present) is copied to public/images/logo.png and used for the favicon.
+// ./photos/logo.png (if present) is resized to public/images/logo.png (max 512px) and used for the favicons.
 
 import { existsSync } from "node:fs";
-import { mkdir, readdir, readFile, rm, stat, writeFile, copyFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
@@ -90,7 +90,8 @@ if (ogSrc && (force || !existsSync(ogOut))) {
 // Logo + favicons
 const logo = path.join(SRC, "logo.png");
 if (existsSync(logo)) {
-  await copyFile(logo, path.join(OUT, "logo.png"));
+  // 512px is plenty for the header badge (≤72px, 2x/3x screens) and the JSON-LD logo; the original can be huge.
+  await sharp(logo).resize(512, 512, { fit: "inside", withoutEnlargement: true }).png({ compressionLevel: 9, palette: true, quality: 90 }).toFile(path.join(OUT, "logo.png"));
   await sharp(logo).resize(512, 512, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toFile(path.join(APP, "icon.png"));
   await sharp(logo).resize(180, 180, { fit: "contain", background: "#F4EEDC" }).png().toFile(path.join(APP, "apple-icon.png"));
   // The placeholder SVG monogram is no longer needed once a real logo exists.
